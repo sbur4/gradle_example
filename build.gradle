@@ -1,0 +1,94 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    compileJava.options.encoding = 'UTF-8'
+}
+
+application {
+    mainClass = 'org.example.App'
+}
+
+description = "Gradle example"
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+//    mavenCentral()
+//    mavenLocal()
+    gradlePluginPortal()
+}
+
+dependencies {
+    // IF ONLINE:
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.10.0'
+
+    // IF OFFLINE or Local JARs:
+
+    // 1.
+    //    flatDir {
+    //        dirs 'lib1', 'lib2'
+    //    }
+
+    // 2.
+    //    dependencies { implementation name: 'sample-jar-0.8.7' }
+
+    // 3.
+    //    implementation files('libs/junit-jupiter-api-5.10.0.jar', 'libs/junit-jupiter-engine-5.10.0.jar')...
+
+    // 4.
+    //    implementation fileTree(dir: 'libs', include: '*.jar')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+//        events "passed", "skipped", "failed", "standardOut", "standardError"
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+
+//    excludeTestsMatching "org.example.security.*"
+//    excludeTest "org.example.SomeTest", "someTestMethod"
+
+//    exclude tests from a package.
+//    exclude 'org/example/security/rule/**'
+//
+//    exclude a single test using the class name.
+//    exclude org/example/security/db/AppTest.class`
+//
+//    exclude tests that matches this folder patterns.
+//    exclude `**/integration/**`
+//
+//    include examples
+//    include 'org/example/security/rule/**'
+//    include `org/example/security/db/AppTest.class`
+
+//    ignoreFailures = true
+}
+
+tasks.register('hello') {
+    doFirst {
+        println 'Hello EPAM!'
+    }
+}
+
+// defaultTasks 'clean'
+
+sourceSets {
+    main {
+        runtimeClasspath = files(output.resourcesDir) + runtimeClasspath
+    }
+    test {
+        runtimeClasspath = files(output.resourcesDir) + runtimeClasspath
+    }
+}
