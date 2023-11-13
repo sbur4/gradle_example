@@ -24,6 +24,10 @@ repositories {
     gradlePluginPortal()
 }
 
+wrapper {
+    gradleVersion = '8.0'
+}
+
 dependencies {
     // IF ONLINE:
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
